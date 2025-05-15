@@ -58,3 +58,10 @@ void secret_function() {
         a += i;
     }
 }
+
+#### Compilación
+
+- gcc -fPIC -shared -o shared_code.so shared_code.c
+
+
+
