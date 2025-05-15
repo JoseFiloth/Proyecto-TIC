@@ -28,7 +28,7 @@ RUN apt update && apt install -y build-essential gcc curl git stress-ng sysbench
 WORKDIR /app
 COPY . .
 
-## 🧪 Prueba 2: Acceso a función compartida (Flush+Reload simplificado)
+### 🧪 Prueba 2: Acceso a función compartida (Flush+Reload simplificado)
 
 **Objetivo:** Detectar variaciones de tiempo al acceder repetidamente a una misma función de una librería compartida, simulando un ataque por canal lateral tipo Flush+Reload.
 
