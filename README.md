@@ -12,7 +12,6 @@ Este proyecto tiene como objetivo comparar el **nivel de aislamiento** entre una
 - `scripts/`: Código fuente en C, scripts Python y Dockerfile.
 - `results/`: Archivos de resultados generados por cada prueba.
 - `notebooks/`: Notebook Jupyter para graficar y analizar los resultados.
-- `docs/`: Este documento y cualquier otro archivo explicativo.
 
 ---
 
