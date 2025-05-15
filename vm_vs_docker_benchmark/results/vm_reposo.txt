@@ -1,0 +1,2 @@
+Media de tiempo: 189.55 µs
+Desviación estándar: 345.59 µs

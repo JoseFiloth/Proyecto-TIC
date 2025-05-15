@@ -46,3 +46,44 @@ COPY . .
 **Indicador de fuga:** Aumento inesperado de tiempo medio o desviación indica interferencia en la caché → posible falta de aislamiento.
 
 ---
+
+## 📊 Fase 4: Resultados y visualización
+
+Se realizaron pruebas en 4 escenarios:
+- VM en reposo
+- VM con interferencia externa
+- Docker en reposo
+- Docker con interferencia externa
+
+Los resultados fueron procesados en `notebooks/visualizar_resultados.ipynb`, donde se graficó el tiempo medio de acceso con barras de desviación estándar.
+
+> Una variación significativa entre estado en reposo y con interferencia indica baja separación a nivel de caché → fuga de información potencial.
+
+Archivos involucrados:
+- `scripts/generate_interference.py`
+- `results/*_reposo.txt`
+- `results/*_con_interferencia.txt`
+- `notebooks/visualizar_resultados.ipynb`
+
+## ✅ Conclusión final
+
+Este proyecto ha permitido comparar el nivel de aislamiento entre una máquina virtual (VM) y un contenedor Docker utilizando una prueba avanzada basada en interferencia de caché, un concepto asociado a ataques por canal lateral.
+
+A través del uso de una función compilada en C, accedida repetidamente desde un script en Python, se midieron los tiempos de ejecución en diferentes escenarios (reposo y con interferencia). El comportamiento de la caché de CPU fue clave para detectar si el entorno podía verse afectado por procesos externos.
+
+### Principales hallazgos:
+
+- **La máquina virtual mostró mayor aislamiento**: los tiempos de ejecución fueron estables, con poca variación incluso cuando el host ejecutaba la misma función en paralelo.
+- **El contenedor Docker evidenció mayor vulnerabilidad**: los tiempos medios y su desviación aumentaron notablemente bajo interferencia externa, indicando una menor separación de recursos.
+- Este resultado **valida que Docker, al compartir el kernel del host**, puede estar más expuesto a canales de fuga pasiva, mientras que las máquinas virtuales ofrecen un entorno más cerrado y protegido a nivel de hardware.
+
+### Consideraciones finales:
+
+- Los contenedores siguen siendo ideales para despliegues rápidos y eficientes, especialmente en entornos CI/CD.
+- Las máquinas virtuales siguen siendo preferibles para ejecutar procesos altamente sensibles o que requieran aislamiento fuerte.
+- Esta metodología puede ser extendida a otras áreas como red compartida, disco, y contexto del sistema operativo para evaluar aislamiento total.
+
+> En definitiva, este proyecto demuestra que el aislamiento entre entornos no debe asumirse únicamente por su separación lógica, sino también evaluarse a nivel de comportamiento del hardware compartido.
+
+---
+
